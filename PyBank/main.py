@@ -1,57 +1,41 @@
 import os
 import csv
 
-csvpath = "python-challenge", "PyBank", "budget_data.csv"
+csvpath = os.path.join ("..", "..", "budget_data.csv")
 
 with open(csvpath, newline='') as csvfile:
-    financial_data = csv.reader(csvfile, delimiter=',')
-    next(financial_data)
+    financial_data = list(csv.reader(csvfile, delimiter=','))
 
-    list_of_values = 0
     total = 0
     row_number = 0
     changes = []
+    preivous_profit_loss = 0
+    max_change = None
+    min_change = None
+    max_change_date = None
+    min_change_date = None 
     
-    for row in financial_data:
+    for row in financial_data[1:]:
         profit_loss = int(row[1])
-        print(profit_loss)
-        
-        if row_number != 1:
-            list_of_values = int(row[1])
-            print(list_of_values)
         total = total + profit_loss
-        change =  next(list_of_values) - profit_loss
-        changes.append(change)
+        if row_number != 0:
+            current_change = profit_loss - preivous_profit_loss
+            changes.append(current_change)
+            if max_change is None or max_change < current_change:
+                max_change = current_change
+                max_change_date = row[0]
+            if min_change is None or min_change > current_change:
+                min_change = current_change
+                min_change_date = row[0]
+        preivous_profit_loss = profit_loss
         row_number = row_number + 1
-        sum_of_changes = sum(changes)
-        average_change = sum_of_changes / row_number
-    print(changes)    
-    
-#     Row = next (csvreader)             #in row 1
-# Total = row[1]
-# Profit_loss = row[1]
-# For row in csvreader:                   #now on row 2
-#     Change = row[1] – profit_loss
-#     Profit_loss = row[1]
-#        total = total + row[1]
-    
-    
-    # for value in changes:
-    #     if value + 1 > value:
-    #         greatest_increase = value + 1
-    #     if value + 1 < value:
-    #         greatest_decrease = value + 1
+sum_of_changes = sum(changes)
+average_change = sum_of_changes / (row_number - 1)
 
-    print(row_number)
-    print(total)
-    print(average_change)
-    #print(greatest_increase)
-    #print(greatest_decrease)
-
-    # print("Financial Analysis")
-    # print("---------------------")
-    # print("Total Months: " + str(row_number))
-    # print("Total: $" + str(total))
-    # print("Average Change: $" + str(average_change))
-    # print("Greatest Incrase in Profits: $" + )
-    # print("Greatest Decrase in Profits: $" + )
+print("Financial Analysis")
+print("---------------------")
+print("Total Months: " + str(row_number))
+print("Total: $" + str(total))
+print("Average Change: $" + str(average_change))
+print("Greatest Incrase in Profits: " + max_change_date + " " + "$" + str(max_change ))
+print("Greatest Decrase in Profits: " + min_change_date + " " + "$" + str(min_change))
