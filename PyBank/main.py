@@ -38,4 +38,15 @@ print("Total Months: " + str(row_number))
 print("Total: $" + str(total))
 print("Average Change: $" + str(average_change))
 print("Greatest Incrase in Profits: " + max_change_date + " " + "$" + str(max_change ))
-print("Greatest Decrase in Profits: " + min_change_date + " " + "$" + str(min_change))
+print("Greatest Decrease in Profits: " + min_change_date + " " + "$" + str(min_change))
+
+output_path = os.path.join("election_data_new.csv")
+with open(output_path, 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile, delimiter=',')
+    csvwriter.writerow(["Financial Analysis"])
+    csvwriter.writerow(["Total Months: " + str(row_number)])
+    csvwriter.writerow(["Total: $" + str(total)])
+    csvwriter.writerow(["Average Change: $" + str(average_change)])
+    csvwriter.writerow(["Greatest Incrase in Profits: " + max_change_date + " " + "$" + str(max_change )])
+    csvwriter.writerow(["Greatest Decrease in Profits: " + min_change_date + " " + "$" + str(min_change)])
+     
