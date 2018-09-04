@@ -40,7 +40,7 @@ print("Average Change: $" + str(average_change))
 print("Greatest Incrase in Profits: " + max_change_date + " " + "$" + str(max_change ))
 print("Greatest Decrease in Profits: " + min_change_date + " " + "$" + str(min_change))
 
-output_path = os.path.join("election_data_new.csv")
+output_path = os.path.join("budget_data_new.csv")
 with open(output_path, 'w', newline='') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=',')
     csvwriter.writerow(["Financial Analysis"])
