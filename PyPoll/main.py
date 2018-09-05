@@ -1,7 +1,7 @@
 import os
 import csv
 
-csvpath = os.path.join("..", "..", "election_data.csv")
+csvpath = os.path.join(r"C:\Users\Owner\Desktop\MINSTP201808DATA2\03-Python\Homework\PyPoll\Resources\election_data.csv")
 
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -33,7 +33,7 @@ print("-------------------------")
 print("Total Votes: " + str(total_votes))
 print("-------------------------")
 for candidate in candidate_count:
-    print("{}: {}% ({})".format(candidate, candidate_percentage[candidate]*100, candidate_count[candidate]))
+    print("{}: {:.3%} ({})".format(candidate, candidate_percentage[candidate], candidate_count[candidate]))
 print("-------------------------")
 print("Winner: " + str(winner))
 
@@ -43,6 +43,6 @@ with open(output_path, 'w', newline='') as csvfile:
     csvwriter.writerow(["Election Results"])
     csvwriter.writerow(["Total Votes: " + str(total_votes)])
     for candidate in candidate_count:
-        csvwriter.writerow(["{}: {}% ({})".format(candidate, 
-            candidate_percentage[candidate]*100, candidate_count[candidate])])
+        csvwriter.writerow(["{}: {:.3%} ({})".format(candidate, 
+            candidate_percentage[candidate], candidate_count[candidate])])
     csvwriter.writerow(["Winner: " + str(winner)])
